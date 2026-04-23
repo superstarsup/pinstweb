@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "if": "Bash(git commit *)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.command' | { read -r cmd; if echo \"$cmd\" | grep -qE '\\-m|\\-\\-message'; then msg=$(echo \"$cmd\" | sed -n \"s/.*\\(-m\\s*['\\\"]\\|--message\\s*['\\\"]\\)\\([^'\\\"]*\\).*/\\2/p\"); if ! echo \"$msg\" | grep -qE '^(feat|fix|docs|style|refactor|test|chore)(:.*)?\\s*#[0-9]+'; then echo '{\"continue\": false, \"stopReason\": \"❌ 커밋 메시지 형식 오류\\n\\n✓ 올바른 형식: <type>: <description> #<issue-number>\\n\\n허용되는 type: feat, fix, docs, style, refactor, test, chore\\n\\n예시:\\n  feat: 새 기능 추가 #5\\n  fix: 버그 수정 #10\\n  docs: 문서 업데이트 #3\"}'; exit 0; fi; fi; }",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
