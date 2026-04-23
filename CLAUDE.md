@@ -65,6 +65,8 @@ PHP include 기반 다중 파일 구조. `index.php` 가 HTML 셸(head/body, nav
 
 CDN (`https://cdn.tailwindcss.com`) 로드. 별도 설정 파일 없음. 커스텀 색상은 인라인 (예: `bg-[#5b8db8]`).
 
+CDN 로드는 프로덕션 콘솔 경고 및 purge 불가 문제가 있으므로, 추후 Tailwind CLI 빌드 산출물로 전환 예정 (이슈 #5).
+
 ## 레이아웃 컨벤션
 
 - 최대 콘텐츠 너비: `max-w-[1000px] mx-auto`
